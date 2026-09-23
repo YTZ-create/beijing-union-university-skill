@@ -79,7 +79,7 @@ Agent 会读取 `SKILL.md` 顶部 frontmatter 中的 `description`，在用户�
 ```
 beijing-union-university/
 ├── SKILL.md                 # 触发说明、回答工作流与铁律、知识导航、问答示例
-├── LICENSE                  # CC BY-NC 4.0（署名-非商业性使用，禁止商用）
+├── LICENSE                  # MIT License
 ├── README.md
 └── references/
     ├── 01-学校速览.md
@@ -102,8 +102,10 @@ beijing-union-university/
 
 ## 许可证
 
-本项目采用 **[Creative Commons 署名-非商业性使用 4.0 国际许可协议（CC BY-NC 4.0）](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans)**：
+本项目采用 **[MIT License](https://opensource.org/licenses/MIT)**：
 
-- ✅ 允许个人学习、非营利分享、在**注明出处**（署名本仓库链接/作者）的前提下改编；
-- ❌ **禁止任何商业用途**（包括但不限于付费售卖、商业培训、付费社群/课程内置、商用产品集成）；
-- 改编后须同样保留本许可声明。
+- ✅ 允许免费使用、复制、修改、合并、发布、分发、再授权，包括商业用途；
+- ⚠️ 需在所有副本中保留原版权声明与许可声明；
+- ⚠️ 软件按"原样"提供，作者不承担任何担保责任。
+
+> 注：本项目为学生/个人自发整理的非官方项目，「北京联合大学/BUU」等名称与标识的权利归北京联合大学所有，MIT 协议仅适用于本仓库的整理内容。

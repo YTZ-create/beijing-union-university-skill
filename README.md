@@ -1,4 +1,16 @@
-# 北京联合大学Skill
+<div align="center">
+
+# 北京联合大学 Skill
+
+**把北联大分散在官网/文件/通知里的信息，整理成一个能自然语言问答、带来源可核实的校园助手技能。**
+
+A campus Q&A Agent Skill for Beijing Union University (BUU) freshmen and students — import into any `SKILL.md`-capable AI assistant and ask in plain language.
+
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Non-Commercial](https://img.shields.io/badge/使用限制-非商业-red)
+![Type](https://img.shields.io/badge/type-Agent%20Skill-blueviolet)
+
+</div>
 
 > ⚠️ **使用限制（重要）**
 >
@@ -7,9 +19,29 @@
 > - ❌ **禁止任何形式的商业用途**，包括但不限于付费售卖、商业培训、付费社群/课程内置、商用产品集成、有偿咨询服务；
 > - 如需商业使用，请联系作者（YTZ-create）获取单独授权。
 
-面向 **北京联合大学 2026 级新生（兼顾全体在校生）** 的校园问答与办事指引 Agent Skill。把分散在学校官网、官方文件、通知里的信息整理成结构化知识库，导入支持 `SKILL.md` 的 AI 助手后，直接用自然语言提问即可获得带来源、可核实的回答。
+> 💡 **看不懂怎么用？** 别啃文档——直接把这个仓库（或这份 README）扔给你的 AI 助手，说一句「按这个帮我把北联大技能装上」，让它读完替你做就行。
 
-适用于**豆包、千问（Qwen）、Marvis（马维斯）、Claude Code、Cursor、Codex、WPS 灵犀 Claw** 等任何支持标准 `SKILL.md` 技能包的 AI 助手/Agent 平台。
+---
+
+## 目录
+
+- [它是什么](#它是什么)
+- [能回答什么](#能回答什么)
+- [工作原理](#工作原理)
+- [如何使用](#如何使用)
+- [提问示例](#提问示例)
+- [触发词](#触发词)
+- [目录结构](#目录结构)
+- [数据来源与免责声明](#数据来源与免责声明)
+- [许可证](#许可证)
+
+---
+
+## 它是什么
+
+面向 **北京联合大学 2026 级新生（兼顾全体在校生）** 的校园问答与办事指引 Agent Skill。把分散在学校官网、官方文件、通知里的信息整理成结构化知识库，导入支持 `SKILL.md` 的 AI 助手后，直接用自然语言提问即可获得**带来源、可核实**的回答。
+
+适用于**豆包、千问（Qwen）、Marvis（马维斯）、Claude Code、Cursor、Codex、WPS 灵犀 Claw** 等任何支持标准 `SKILL.md` 技能包的 AI 助手 / Agent 平台。
 
 ## 能回答什么
 
@@ -22,6 +54,21 @@
 - 校内信息系统入口、账号密码规则、各部门官方电话
 - 40+ 条新生高频 FAQ 与开学防坑提醒
 
+## 工作原理
+
+```mermaid
+flowchart LR
+    U["用户自然语言提问<br/>如「管理学院新生去哪报到」"] --> T{"命中触发词?<br/>联大/BUU/校区/学院/校园话题"}
+    T -- 否 --> N["不触发，正常对话"]
+    T -- 是 --> S["读取 SKILL.md<br/>回答工作流 + 铁律 + 信源优先级"]
+    S --> R["检索 references/ 9 个知识文件"]
+    R --> V{"时效性问题?"}
+    V -- 是 --> W["主动联网核实现行版本"]
+    V -- 否 --> A["组织答案"]
+    W --> A
+    A --> O["给出带来源、可核实的回答<br/>未核实项标【待核实】"]
+```
+
 ## 如何使用
 
 ### 第一步：获取技能文件
@@ -29,7 +76,11 @@
 两种方式任选其一：
 
 1. **下载 zip**：GitHub 仓库主页 → 绿色 `Code` 按钮 → `Download ZIP`，解压后得到 `beijing-union-university/` 文件夹；
-2. **git clone**：`git clone https://github.com/YTZ-create/beijing-union-university-skill.git`
+2. **git clone**：
+
+   ```bash
+   git clone https://github.com/YTZ-create/beijing-union-university-skill.git
+   ```
 
 文件夹内必须包含 `SKILL.md` 和 `references/` 目录，这是技能的核心。
 
@@ -55,7 +106,7 @@
 
 1. 打开 Marvis 客户端 → 进入「技能 / 技能广场」；
 2. 选择「导入自定义 Skill」→ 选中下载的技能 zip（或解压后的 `beijing-union-university/` 文件夹）；
-3. 导入完成后在对话中直接提问即可自动调用，例如「联大宿舍咋样」「助学金怎么申请」。
+3. 导入完成后在对话中直接提问即可自动调用，例如「联大宿舍咋样」「助学金怎么申请」；
 4. 如本技能后续上架 Marvis 技能广场，也可直接在技能广场搜索「北京联合大学」一键装载。
 
 #### 🟢 其他 Agent（Claude Code / Cursor / Codex / WPS 灵犀 Claw 等）
@@ -67,7 +118,7 @@
 
 Agent 会读取 `SKILL.md` 顶部 frontmatter 中的 `description`，在用户问到联大相关问题时自动触发。
 
-### 第三步：开始提问（示例）
+## 提问示例
 
 | 你可以这样问 | 技能会怎么答 |
 |---|---|
@@ -77,7 +128,9 @@ Agent 会读取 `SKILL.md` 顶部 frontmatter 中的 `description`，在用户�
 | 「国家奖学金多少钱？怎么评？」 | 说明 10000 元/年（2024 年起标准）、面向二年级以上、看成绩+综测，并引导到学院/学生处通知 |
 | 「北四环校区怎么坐地铁？」 | 给出 5 号线惠新西街北口 B 口 + 步行路线，并提示校内不提供停车 |
 
-### 触发词（提到这些就会自动调用）
+## 触发词
+
+提到这些就会自动调用：
 
 北京联合大学、联大、北联大、BUU、小营校区、北四环校区、学院路校区、外馆斜街校区、红领巾桥校区、垡头校区、工体北路校区、蒲黄榆校区；应用文理学院、师范学院、商务学院、生物化学工程学院、旅游学院、智慧城市学院、机器人学院、城市轨道交通与物流学院、管理学院、特殊教育学院、艺术学院；以及新生报到、选课、转专业、保研、宿舍、食堂、奖助学金、社团、校园网等校园生活话题。
 
@@ -86,7 +139,7 @@ Agent 会读取 `SKILL.md` 顶部 frontmatter 中的 `description`，在用户�
 ```
 beijing-union-university/
 ├── SKILL.md                 # 触发说明、回答工作流与铁律、知识导航、问答示例
-├── LICENSE                  # MIT License
+├── LICENSE                  # MIT License（附加非商业条款）
 ├── README.md
 └── references/
     ├── 01-学校速览.md
@@ -114,6 +167,6 @@ beijing-union-university/
 - ✅ 允许个人免费使用、复制、修改、发布、分发、再授权；
 - ❌ **禁止任何形式的商业用途**（付费售卖、商业培训、付费社群/课程内置、商用产品集成等），商业使用需联系作者单独授权；
 - ⚠️ 需在所有副本中保留原版权声明、许可声明及本非商业条款；
-- ⚠️ 软件按"原样"提供，作者不承担任何担保责任。
+- ⚠️ 软件按“原样”提供，作者不承担任何担保责任。
 
 > 注：本项目为学生/个人自发整理的非官方项目，「北京联合大学/BUU」等名称与标识的权利归北京联合大学所有，MIT 协议仅适用于本仓库的整理内容。
